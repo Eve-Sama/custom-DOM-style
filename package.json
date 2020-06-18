@@ -1,0 +1,14 @@
+{
+  "name": "custom-clear-dom",
+  "version": "0.0.1",
+  "description": "A browser extension that allow you delete any DOMs you want",
+  "main": "index.js",
+  "author": "Eve",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.0.5",
+    "ts-node": "~8.3.0",
+    "tslint": "~5.19.0",
+    "typescript": "~3.8.3"
+  }
+}
