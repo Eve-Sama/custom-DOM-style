@@ -1,0 +1,10 @@
+body {
+  background: #ffa80d;
+}
+#container {
+  display: flex;
+  justify-content: center;
+  width: 280px;
+  height: 500px;
+  color: red;
+}
