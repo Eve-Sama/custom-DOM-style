@@ -12,6 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.baidu.com/"],
+      "run_at": "document_start",
       "js": ["./baidu/baidu.js"]
     }
   ]
