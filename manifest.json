@@ -8,10 +8,11 @@
     "default_title": "Custom Web Style",
     "default_popup": "popup/popup.html"
   },
+  "permissions": ["tabs", "activeTab"],
   "content_scripts": [
     {
       "matches": ["https://www.baidu.com/"],
-      "js": ["./build/baidu.js"]
+      "js": ["./baidu/baidu.js"]
     }
   ]
 }
