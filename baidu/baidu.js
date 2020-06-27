@@ -8,7 +8,14 @@
 // // There is a css problem that search button on FireFox, let's fix it
 // const btnSearch = document.querySelector('#su');
 // btnSearch.style.height = '43.2px';
-
+document.addEventListener('mousemove', (e)=>{
+console.log(e, `e`);
+})
+// var e = event;　
+// var x = e.pageX || e.clientX + document.body.scroolLeft;
+// var y = e.pageY || e.clientY + document.body.scrollTop;
+// var ele = document.elementFromPoint(x,y);
+// console.log(e);
 // #region delete useless DOM
 hideSelectors([
   '#s_top_wrap',
@@ -23,7 +30,7 @@ hideSelectors([
 
 function hideSelectors(v) {
   const styleElement = document.createElement('style');
-  styleElement.textContent = v.join(',') + '{ display: none !important }';
+  styleElement.textContent = v.join(',') + '{ visibility: hidden !important }';
   document.documentElement.appendChild(styleElement);
 }
 // #endregion
