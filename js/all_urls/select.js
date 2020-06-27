@@ -11,7 +11,7 @@ $('body')
  * @param {JQuery<HTMLElement>} dom A instance of DOM
  */
 function hightLightArea(dom) {
-  // console.log(dom, `dom`);
+  console.log(dom, `dom`);
   // #region Calculate basic attribute
   const top = dom.offset().top;
   const left = dom.offset().left;
