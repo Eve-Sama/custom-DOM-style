@@ -3,19 +3,12 @@
  * Chrome extension config address: chrome://extensions
  */
 
-
 /** If enable below code, then the code about DELETE will not work, idk why... */
-// // There is a css problem that search button on FireFox, let's fix it
-// const btnSearch = document.querySelector('#su');
-// btnSearch.style.height = '43.2px';
-document.addEventListener('mousemove', (e)=>{
-console.log(e, `e`);
-})
-// var e = event;　
-// var x = e.pageX || e.clientX + document.body.scroolLeft;
-// var y = e.pageY || e.clientY + document.body.scrollTop;
-// var ele = document.elementFromPoint(x,y);
-// console.log(e);
+// There is a css problem that search button on FireFox, let's fix it
+const btnSearch = document.querySelector('#su');
+btnSearch.style.height = '43.2px';
+
+
 // #region delete useless DOM
 hideSelectors([
   '#s_top_wrap',

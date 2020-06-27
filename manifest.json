@@ -13,7 +13,14 @@
     {
       "matches": ["https://www.baidu.com/"],
       "run_at": "document_start",
-      "js": ["./baidu/baidu.js"]
+      "js": ["./js/baidu/baidu.js"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "./node_modules/jquery/dist/jquery.min.js",
+        "./js/all_urls/index.js"
+      ]
     }
   ]
 }

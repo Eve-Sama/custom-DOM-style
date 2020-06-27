@@ -5,8 +5,7 @@
   "main": "index.js",
   "author": "Eve",
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^14.0.5",
-    "tslint": "~5.19.0"
+  "dependencies": {
+    "jquery": "^3.5.1"
   }
 }
