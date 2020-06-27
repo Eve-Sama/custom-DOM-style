@@ -9,16 +9,16 @@
 // btnSearch.style.height = '43.2px';
 
 // #region delete useless DOM
-// hideSelectors([
-//   '#s_top_wrap',
-//   '#bottom_layer',
-//   '#lm-new',
-//   '#s-top-left',
-//   '#u1',
-//   '#s-hotsearch-wrapper',
-//   '.s-p-top',
-//   '#s_side_wrapper'
-// ]);
+hideSelectors([
+  '#s_top_wrap',
+  '#bottom_layer',
+  '#lm-new',
+  '#s-top-left',
+  '#u1',
+  '#s-hotsearch-wrapper',
+  '.s-p-top',
+  '#s_side_wrapper'
+]);
 
 function hideSelectors(v) {
   const styleElement = document.createElement('style');

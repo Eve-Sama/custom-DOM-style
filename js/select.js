@@ -1,10 +1,10 @@
-$('body')
-  .children()
-  .mouseover(event => {
-    // Compatible with FireFox(only target) and Chrome(only path)
-    const currentElement = $(event.target || event.path[0]);
-    hightLightArea(currentElement);
-  });
+// $('body')
+//   .children()
+//   .mouseover(event => {
+//     // Compatible with FireFox(only target) and Chrome(only path)
+//     const currentElement = $(event.target || event.path[0]);
+//     hightLightArea(currentElement);
+//   });
 
 /**
  * Highlight the area of the mouse's hover

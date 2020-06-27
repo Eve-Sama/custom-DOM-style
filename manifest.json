@@ -1,26 +1,29 @@
 {
   "manifest_version": 2,
-  "name": "Custom Web Style",
+  "name": "Custom DOM Style",
   "version": "0.0.1",
-  "description": "IDK what to say",
+  "description": "A browser extension that allow you custom dom's style",
   "browser_action": {
     "default_icon": "./image/inuyasha.jpg",
-    "default_title": "Custom Web Style",
-    "default_popup": "popup/popup.html"
+    "default_title": "Custom DOM Style",
+    "default_popup": "./pages/popup/popup.html"
   },
-  "permissions": ["tabs", "activeTab"],
+  "permissions": ["storage"],
+  "background": {
+    "page": "./pages/background/background.html"
+  },
   "content_scripts": [
-    {
-      "matches": ["https://www.baidu.com/"],
-      "run_at": "document_start",
-      "js": ["./js/baidu/baidu.js"]
-    },
     {
       "matches": ["<all_urls>"],
       "js": [
         "./node_modules/jquery/dist/jquery.min.js",
-        "./js/all_urls/select.js"
+        "./js/select.js"
       ]
+    },
+    {
+      "matches": ["https://www.baidu.com/"],
+      "run_at": "document_start",
+      "js": ["./js/clear.js"]
     }
   ]
 }
