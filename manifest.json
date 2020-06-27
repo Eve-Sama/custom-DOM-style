@@ -4,9 +4,14 @@
   "version": "0.0.1",
   "description": "A browser extension that allow you custom dom's style",
   "browser_action": {
-    "default_icon": "./image/inuyasha.jpg",
+    "default_icon": "./images/48x48.png",
     "default_title": "Custom DOM Style",
     "default_popup": "./pages/popup/popup.html"
+  },
+  "icons": {
+    "16": "images/16x16.png",
+    "48": "images/48x48.png",
+    "128": "images/128x128.png"
   },
   "permissions": ["storage"],
   "background": {
@@ -15,10 +20,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": [
-        "./node_modules/jquery/dist/jquery.min.js",
-        "./js/select.js"
-      ]
+      "js": ["./node_modules/jquery/dist/jquery.min.js", "./js/select.js"]
     },
     {
       "matches": ["https://www.baidu.com/"],
