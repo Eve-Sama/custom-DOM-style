@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es5",
+    "outDir": "dist",
+    "downlevelIteration": true,
+    "removeComments": true,
+    "baseUrl": "."
+  },
+  "include": ["dev"],
+  "exclude": ["node_modules"]
+}
