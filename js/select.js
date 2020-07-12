@@ -1,43 +1,37 @@
-function selectDOM() {
-  $('body').mousemove(event => {
-    //   let target = event.target;
-    //   while (target.parentNode) {
-    //     target = target.parentNode;
-    //     console.log(target, `target`);
-    //   }
-    //   $('body')
-    // .children().unbind();
-    // Compatible with FireFox(only target) and Chrome(only path)
-    const currentElement = $(event.target || event.path[0]);
-    deleteSelectArea();
-    hightLightArea(currentElement);
-    // console.log(currentElement);
-  });
+function selectMode() {
+  $('body')
+    .children()
+    .mousemove(event => {
+      // Compatible with FireFox(only target) and Chrome(only path)
+      const currentElement = $(event.target || event.path[0]);
+      hightLightArea(currentElement);
+    });
 }
 
-function cancelSelectDOM() {
+function cancelSelectMode() {
   $('body').children().unbind();
-  deleteSelectArea();
-}
-
-function deleteSelectArea() {
   $('#cds-select-elem').remove();
 }
 
-// Get message from popup or background;
+// Send DOM info to background after user select DOM
+// chrome.runtime.sendMessage({ data: targetElem.attr('id') }, null);
+
+// Listen message from popup or background;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log('select');
   const { messageType, data } = request;
   switch (messageType) {
-    case 'select-DOM':
+    case 'select-mode':
       const { action } = data;
       if (action === 'open') {
-        selectDOM();
+        selectMode();
       } else if (action === 'close') {
-        cancelSelectDOM();
+        cancelSelectMode();
       }
       break;
   }
 });
+
 /**
  * Highlight the area of the mouse's hover
  * @param {JQuery<HTMLElement>} dom A instance of DOM
@@ -70,3 +64,10 @@ function hightLightArea(dom) {
   }
   // #endregion
 }
+
+// get path
+// let target = event.target;
+// while (target.parentNode) {
+//   target = target.parentNode;
+//   console.log(target, `target`);
+// }

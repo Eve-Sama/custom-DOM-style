@@ -20,7 +20,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./node_modules/jquery/dist/jquery.min.js", "./js/select.js"]
+      "js": ["./js/jquery.min.js", "./js/select.js"]
     },
     {
       "matches": ["https://www.baidu.com/"],
