@@ -1,10 +1,11 @@
 /** If I change the commonJS to ESModule, the terminal shows 'Cannot use import statement outside a module', idk how to fix it */
 const { task, src, dest, watch, series, parallel } = require('gulp');
+const plugins = require('gulp-load-plugins')();
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json');
 
 function copyAllFiles(cb) {
-  src(['dev/**/*', '!dev/**/*.ts']).pipe(dest('dist'));
+  src(['dev/**/*', '!dev/**/*.ts', '!dev/**/*.less']).pipe(dest('dist'));
   cb();
 }
 
@@ -13,18 +14,27 @@ function tsc(cb) {
   cb();
 }
 
-function watcher() {
-  watch('dev/', tsc);
+// 对scss/less编译压缩，输出css文件
+function css(cb) {
+  src('dev/**/*.less')
+    .pipe(plugins.less({ outputStyle: 'compressed' }))
+    .pipe(
+      plugins.autoprefixer({
+        casecade: false,
+        remove: false
+      })
+    )
+    .pipe(dest('dist'));
+  cb();
 }
 
-// 真的需要每次 code 都 copyAllFiles 吗? 感觉这里可以有更好的办法, 比如当文件数量 change 的时候再拷贝
-task('default', series([copyAllFiles, tsc, watcher]));
-// task('default', series([fnTsc, watcher, copy]));
-// task('default', parallel(['watch-files-change']));
+function watcher() {
+  // It will watse resouce if execute copyAllFiles whenever .ts file change
+  // watch('dev/', series([copyAllFiles, tsc]));
+  watch('dev/', parallel([tsc, css]));
+}
 
-/**
- * 思路:
- * 1. 将所有文件全部拷贝到 dist
- * 2. 将 ts 编译为 js 后, 删除ts
- * 3. 将 sass 编译为 css 后, 删除sass
- */
+task('start', series([copyAllFiles, tsc, css, watcher]));
+
+// It's unnesscery for me now, I'll use is when the project become very big
+// require('./scripts/start');

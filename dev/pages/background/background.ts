@@ -1,8 +1,8 @@
-const data2 = 1;
+const data = 1;
 
 console.log('background.js');
 function showData() {
-  const selectedElem = $(`<div>${data2}</div>`);
+  const selectedElem = $(`<div>${data}</div>`);
   $('body').append(selectedElem);
 }
 

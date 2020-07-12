@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Eve",
   "license": "MIT",
+  "scripts": {
+    "start": "gulp start"
+  },
   "dependencies": {
     "jquery": "^3.5.1"
   },
@@ -14,10 +17,12 @@
     "@types/jquery": "^3.5.0",
     "@types/node": "^14.0.5",
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-less": "^4.0.1",
+    "gulp-load-plugins": "^2.0.3",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "gulp-watch": "^5.0.1",
     "ts-node": "~8.3.0",
-    "typescript": "^3.9.6",
-    "tslint": "~5.19.0"
+    "tslint": "~5.19.0",
+    "typescript": "^3.9.6"
   }
 }
