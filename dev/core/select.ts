@@ -2,8 +2,7 @@ function selectMode() {
   $('body')
     .children()
     .mousemove(event => {
-      // Compatible with FireFox(only target) and Chrome(only path)
-      const currentElement = $(event.target || event.path[0]);
+      const currentElement = $(event.target);
       hightLightArea(currentElement);
     });
 }

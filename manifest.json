@@ -2,30 +2,25 @@
   "manifest_version": 2,
   "name": "Custom DOM Style",
   "version": "0.0.1",
-  "description": "A browser extension that allow you custom dom's style",
+  "description": "A browser extension that allow you custom DOM's style",
   "browser_action": {
-    "default_icon": "./images/48x48.png",
+    "default_icon": "dist/images/48x48.png",
     "default_title": "Custom DOM Style",
-    "default_popup": "./pages/popup/popup.html"
+    "default_popup": "dist/pages/popup/popup.html"
   },
   "icons": {
-    "16": "images/16x16.png",
-    "48": "images/48x48.png",
-    "128": "images/128x128.png"
+    "16": "dist/images/16x16.png",
+    "48": "dist/images/48x48.png",
+    "128": "dist/images/128x128.png"
   },
   "permissions": ["storage"],
   "background": {
-    "page": "./pages/background/background.html"
+    "page": "dist/pages/background/background.html"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./js/jquery.min.js", "./js/select.js"]
-    },
-    {
-      "matches": ["https://www.baidu.com/"],
-      "run_at": "document_start",
-      "js": ["./js/clear.js"]
+      "js": ["dist/lib/jquery/jquery.min.js", "dist/core/select.js"]
     }
   ]
 }

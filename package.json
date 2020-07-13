@@ -1,7 +1,7 @@
 {
   "name": "custom-clear-dom",
   "version": "0.0.1",
-  "description": "A browser extension that allow you delete any DOMs you want",
+  "description": "A browser extension that allow you delete any DOM's you want",
   "main": "index.js",
   "author": "Eve",
   "license": "MIT",
