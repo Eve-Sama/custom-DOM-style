@@ -11,7 +11,7 @@ function copyAllFiles(cb) {
   cb();
 }
 
-function tsc(cb) {
+function js(cb) {
   src('dev/**/*.ts')
     .pipe(plugins.newer('dist'))
     .pipe(tsProject())
@@ -34,13 +34,21 @@ function css(cb) {
   cb();
 }
 
-function watcher() {
-  // It will watse resouce if execute copyAllFiles whenever .ts file change
-  // watch('dev/', series([copyAllFiles, tsc]));
-  watch('dev/', parallel([tsc, css]));
+// copy html files to dist
+function html(cb) {
+  src('dev/**/*.html')
+    .pipe(plugins.newer('dist'))
+    .pipe(dest('dist'));
+  cb();
 }
 
-task('start', series([tsc, css, watcher]));
+function watcher() {
+  // It will watse resouce if execute copyAllFiles whenever .ts file change
+  // watch('dev/', series([copyAllFiles, js]));
+  watch('dev/', parallel([html, css, js]));
+}
+
+task('start', series([js, css, watcher]));
 task('copy', parallel([copyAllFiles]));
 
 // It's unnesscery for me now, I'll use is when the project become very big

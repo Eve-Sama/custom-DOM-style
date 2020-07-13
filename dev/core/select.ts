@@ -5,6 +5,11 @@ function selectMode() {
       const currentElement = $(event.target);
       hightLightArea(currentElement);
     });
+
+  $(document).click(event => {
+    console.log(event);
+    // $('#id_').hide();
+  });
 }
 
 function cancelSelectMode() {

@@ -5,11 +5,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CDS设置</title>
+  <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./background.css">
 </head>
 
 <body>
-  Background
-  <script src="../../js/jquery.min.js"></script>
+  <div class="bg-page-container">
+    <!-- <h3>在这里, 可以查看和管理所有的DOM设置</h3> -->
+    <p class="lead">
+      在这里, 可以查看和管理所有的DOM设置.
+    </p>
+    <table class="table table-hover table-bordered table-dark">
+      <thead class="bg-primary">
+        <tr>
+          <th scope="col">序号</th>
+          <th scope="col">域名</th>
+          <th scope="col">选择器</th>
+          <th scope="col" width="30%">行为</th>
+          <th scope="col">管理</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>1</th>
+          <td>baidu.com</td>
+          <td>#title</td>
+          <td>
+            <code>
+              display: none;
+              color: #fff;color: #fff;color: #fff;color: #fff;color: #fff;color: #fff;color: #fff;color: #fff;
+            </code>
+          </td>
+          <td>删除、编辑</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>qingflow.com</td>
+          <td>#title</td>
+          <td>自定义</td>
+          <td>删除、编辑</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>google.com</td>
+          <td>#btn</td>
+          <td>隐藏</td>
+          <td>删除、编辑</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="../../lib/jquery/jquery.min.js"></script>
+  <script src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
   <script src="./background.js"></script>
 </body>
 

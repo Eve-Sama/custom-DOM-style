@@ -1,5 +1,5 @@
 $('#setting-center').click(() => {
-  window.open(chrome.extension.getURL('./pages/background/background.html'));
+  window.open(chrome.extension.getURL('dist/pages/background/background.html'));
 });
 
 /**
