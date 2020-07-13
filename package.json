@@ -6,7 +6,8 @@
   "author": "Eve",
   "license": "MIT",
   "scripts": {
-    "start": "gulp start"
+    "start": "gulp start",
+    "copy": "gulp copy"
   },
   "dependencies": {
     "jquery": "^3.5.1"
@@ -20,6 +21,7 @@
     "gulp-autoprefixer": "^7.0.1",
     "gulp-less": "^4.0.1",
     "gulp-load-plugins": "^2.0.3",
+    "gulp-newer": "^1.4.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "ts-node": "~8.3.0",
     "tslint": "~5.19.0",
