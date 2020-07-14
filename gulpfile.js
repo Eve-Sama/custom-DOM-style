@@ -48,7 +48,7 @@ function watcher() {
   watch('dev/', parallel([html, css, js]));
 }
 
-task('start', series([js, css, watcher]));
+task('start', series([copyAllFiles, js, css, watcher]));
 task('copy', parallel([copyAllFiles]));
 
 // It's unnesscery for me now, I'll use is when the project become very big

@@ -14,6 +14,7 @@ function sendMessage(message: any): void {
 
 $('#select-dom-open').click(() => {
   sendMessage({ messageType: 'select-mode', data: { action: 'open' } });
+  window.close();
 });
 
 $('#select-dom-close').click(() => {
