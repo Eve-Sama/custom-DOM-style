@@ -1,4 +1,4 @@
-function selectMode() {
+function selectMode(): void {
   $('body')
     .children()
     .mousemove(event => {
@@ -6,13 +6,13 @@ function selectMode() {
       hightLightArea(currentElement);
     });
 
-  $(document).click(event => {
-    console.log(event);
-    // $('#id_').hide();
-  });
+  // $(document).click(event => {
+  //   console.log(event);
+  //   // $('#id_').hide();
+  // });
 }
 
-function cancelSelectMode() {
+function cancelSelectMode(): void {
   $('body').children().unbind();
   $('#cds-select-elem').remove();
 }
@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
  * Highlight the area of the mouse's hover
  * @param {JQuery<HTMLElement>} dom A instance of DOM
  */
-function hightLightArea(dom) {
+function hightLightArea(dom: JQuery<HTMLElement>) {
   // #region Calculate basic attribute
   const top = dom.offset().top;
   const left = dom.offset().left;

@@ -6,9 +6,9 @@ $('#setting-center').click(() => {
  * Send message to『content-script』
  * @param {Object} request Data with JSON
  */
-function sendMessage(request) {
+function sendMessage(message: any): void {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, request, null);
+    chrome.tabs.sendMessage(tabs[0].id, message, null);
   });
 }
 
