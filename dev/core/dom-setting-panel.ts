@@ -1,3 +1,3 @@
 function showInfo(): void {
-  console.log('showInfo');
+  console.log('dom-setting-panel.ts');
 }

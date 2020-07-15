@@ -1,5 +1,5 @@
 // Inject script to page
-$(document).ready(function(){
+$(document).ready(function () {
   const script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
   script.src = chrome.extension.getURL('dist/core/dom-setting-panel.js');
@@ -9,27 +9,57 @@ $(document).ready(function(){
   document.body.appendChild(script);
 });
 
+// Use H5 send message
+function sendCDSMessage(data: any): void {
+  window.postMessage(data, '*');
+}
+
+// Listen H5 message
+window.addEventListener(
+  'message',
+  function (e) {
+    const { data } = e;
+    console.log(data, `data`);
+    // toast(data);
+  },
+  false
+);
 
 let onSelect = false;
-function selectMode(): void {
+function openSelectMode(): void {
   if (onSelect) {
     return;
   }
   onSelect = true;
+
   $('body')
     .children()
-    .mousemove(event => {
-      const currentElement = $(event.target);
-      hightLightArea(currentElement);
-    });
+    .mousemove(event => hightLightArea($(event.target)));
 
   showSelectTip();
 
-  $(document).click(event => {
-    console.log(event.target);
-    this.closeSelectMode();
-    // $('#id_').hide();
-  });
+  $(document).click(event => handleSelectedDom($(event.target)));
+}
+
+function handleSelectedDom(dom: JQuery<Document>): void {
+  const from = dom.attr('data-from');
+  switch (from) {
+    case 'cds-cancel':
+      closeSelectMode();
+      hideSelectTip();
+      break;
+    case 'cds':
+      toast('想造反啊?!!!', 'warning');
+      break;
+    default:
+      settingDomStyle();
+      break;
+  }
+}
+
+function settingDomStyle(): void {
+  closeSelectMode();
+  hideSelectTip();
 }
 
 function closeSelectMode(): void {
@@ -41,15 +71,39 @@ function closeSelectMode(): void {
 
 /** Show some tips when user is selecting DOM */
 function showSelectTip(): void {
-  const settingPanel = $(`
-  <div id="cds-dom-setting-panel">
-    <div class="content-text">
-      点击左键可以选中需要自定义的内容<br/>
-      <a href="javascript:showInfo()">点击此处取消选择</a>
+  const template = $(`
+  <div class="cds-element" data-from="cds">
+    <div id="cds-dom-setting-panel" data-from="cds">
+      <div class="content-text" data-from="cds">
+        点击左键可以选中需要自定义的内容<br/>
+        <a href="javascript:showInfo()" data-from="cds-cancel">点击此处取消选择</a>
+      </div>
     </div>
   </div>
   `);
-  $('body').append(settingPanel);
+  $('body').append(template);
+}
+
+function toast(info: string, type: 'danger' | 'warning'): void {
+  const template = $(`
+  <div class="cds-element" data-from="cds">
+    <div class="cds-toast cds-toast-${type}">
+      ${info}
+    </div>
+  </div>
+  `);
+  $('body').append(template);
+  setTimeout(() => {
+    template.find('.cds-toast').addClass('cds-toast-leave');
+    setTimeout(() => {
+      template.remove();
+    }, 400);
+  }, 2000);
+}
+
+function hideSelectTip(): void {
+  const settingPanel = $('#cds-dom-setting-panel').parent();
+  settingPanel.remove();
 }
 
 // Send DOM info to background after user select DOM
@@ -62,7 +116,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     case 'select-mode':
       const { action } = data;
       if (action === 'open') {
-        selectMode();
+        openSelectMode();
       } else if (action === 'close') {
         closeSelectMode();
       }

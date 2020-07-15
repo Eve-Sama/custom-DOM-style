@@ -1,17 +1,68 @@
-#cds-dom-setting-panel {
-  position: fixed;
-  right: 20px;
-  top: 20px;
-  width: 500px;
-  height: 70px;
-  background: #ffa80d;
-  padding: 10px;
-  box-shadow: 0px 0px 10px #F5BC21;
-  border-radius: 3px;
-  z-index: 999;
-  .content-text {
-    color: #fff;
+// Every CDS element need to add 『cds-element』 as prefix avoiding pollute origin web page
+.cds-element {
+  box-sizing: content-box;
+  #cds-dom-setting-panel {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 500px;
+    height: 70px;
+    background: #ffa80d;
+    padding: 10px;
+    box-shadow: 0px 0px 10px #f5bc21;
+    border-radius: 5px;
+    z-index: 999;
+    .content-text {
+      color: #fff;
+      font-size: 25px;
+      text-align: left;
+    }
+  }
+
+  .cds-toast {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    min-width: 200px;
+    padding: 10px;
+    border-radius: 5px;
     font-size: 25px;
     text-align: left;
+    z-index: 999;
+    animation-name: fade-in-left;
+    animation-duration: 0.5s;
+    @keyframes fade-in-left {
+      0% {
+        transform: translate3d(-100%, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    &.cds-toast-leave {
+      animation-name: leave;
+      @keyframes leave {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+
+        100% {
+          transform: translate3d(-120%, 0, 0);
+        }
+      }
+    }
+    &.cds-toast-danger {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      box-shadow: 0px 0px 10px #f5c6cb;
+    }
+    &.cds-toast-warning {
+      color: #856404;
+      background-color: #fff3cd;
+      border-color: #ffeeba;
+      box-shadow: 0px 0px 10px #ffeeba;
+    }
   }
 }
