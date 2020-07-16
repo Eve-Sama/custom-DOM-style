@@ -4,7 +4,7 @@
 $(document).ready(function () {
   const script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
-  script.src = chrome.extension.getURL('dist/core/dom-setting-panel.js');
+  script.src = chrome.extension.getURL('dist/content-script/inject.js');
   script.onload = function (event) {
     $(event.target).remove();
   };
