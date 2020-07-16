@@ -1,3 +1,5 @@
+/** Select DOM logic */
+
 let onSelect = false;
 function openSelectMode(): void {
   if (onSelect) {

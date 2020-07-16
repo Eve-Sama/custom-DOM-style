@@ -1,3 +1,5 @@
+/** Messages between all pages */
+
 // Use H5 send message
 function sendCDSMessage(data: any): void {
   window.postMessage(data, '*');

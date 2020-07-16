@@ -1,3 +1,5 @@
+/** Actions that should be done in the first of all */
+
 // Inject script to page
 $(document).ready(function () {
   const script = document.createElement('script');

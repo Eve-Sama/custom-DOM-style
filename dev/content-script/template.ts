@@ -1,3 +1,5 @@
+/** The DOM template that will shows in origin web page */
+
 /** Show some tips when user is selecting DOM */
 function showSelectTip(): void {
   const template = $(`
