@@ -1,2 +1,3 @@
-# custom-clear-DOM
-A browser extension that allow you delete any DOMs you want
+## ☀️ 介绍
+
+本项目是一个浏览器插件, 支持Chrome、Firefox. 先不过多介绍, 等内测的时候再补充资料. 
