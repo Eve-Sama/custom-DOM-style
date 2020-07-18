@@ -27,14 +27,16 @@ function clickDom(dom: JQuery<Document>): void {
       toast('想造反啊?!!!', 'warning');
       break;
     default:
-      settingDomStyle();
+      settingDomStyle(dom);
       break;
   }
 }
 
-function settingDomStyle(): void {
+function settingDomStyle(dom: JQuery<Document>): void {
   closeSelectMode();
   hideSelectTip();
+  const id = dom.attr('id');
+  const cls = dom.attr('class');
 }
 
 function closeSelectMode(): void {
@@ -45,8 +47,12 @@ function closeSelectMode(): void {
 }
 
 function hideSelectTip(): void {
-  const settingPanel = $('#cds-dom-setting-panel').parent();
-  settingPanel.remove();
+  const template = $('.cds-element #cds-dom-setting-panel');
+  // settingPanel.remove();
+  template.addClass('cds-out-right');
+  setTimeout(() => {
+    template.remove();
+  }, 400);
 }
 
 // Send DOM info to background after user select DOM

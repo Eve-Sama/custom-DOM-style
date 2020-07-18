@@ -2,7 +2,7 @@
  * Styles that should be injected in the origin web page
  * Every CDS element need to add 『cds-element』 as prefix avoiding pollute origin web page
  */
- 
+
 .cds-element {
   box-sizing: content-box;
   #cds-dom-setting-panel {
@@ -15,6 +15,7 @@
     padding: 10px;
     box-shadow: 0px 0px 10px #f5bc21;
     border-radius: 5px;
+    animation-duration: 0.5s;
     z-index: 999;
     .content-text {
       color: #fff;
@@ -33,29 +34,7 @@
     font-size: 25px;
     text-align: left;
     z-index: 999;
-    animation-name: fade-in-left;
     animation-duration: 0.5s;
-    @keyframes fade-in-left {
-      0% {
-        transform: translate3d(-100%, 0, 0);
-      }
-
-      100% {
-        transform: translate3d(0, 0, 0);
-      }
-    }
-    &.cds-toast-leave {
-      animation-name: leave;
-      @keyframes leave {
-        0% {
-          transform: translate3d(0, 0, 0);
-        }
-
-        100% {
-          transform: translate3d(-120%, 0, 0);
-        }
-      }
-    }
     &.cds-toast-danger {
       color: #721c24;
       background-color: #f8d7da;
@@ -67,6 +46,55 @@
       background-color: #fff3cd;
       border-color: #ffeeba;
       box-shadow: 0px 0px 10px #ffeeba;
+    }
+  }
+
+  .cds-in-left {
+    animation-name: in-left;
+  }
+  .cds-in-right {
+    animation-name: in-right;
+  }
+  .cds-out-left {
+    animation-name: out-left;
+  }
+  .cds-out-right {
+    animation-name: out-right;
+  }
+  @keyframes in-left {
+    0% {
+      transform: translate3d(-120%, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes out-left {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(-120%, 0, 0);
+    }
+  }
+  @keyframes in-right {
+    0% {
+      transform: translate3d(120%, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes out-right {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(120%, 0, 0);
     }
   }
 }

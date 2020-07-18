@@ -4,7 +4,7 @@
 function showSelectTip(): void {
   const template = $(`
   <div class="cds-element" data-from="cds">
-    <div id="cds-dom-setting-panel" data-from="cds">
+    <div id="cds-dom-setting-panel" class="cds-in-right" data-from="cds">
       <div class="content-text" data-from="cds">
         点击左键可以选中需要自定义的内容<br/>
         <a href="javascript:showInfo()" data-from="cds-cancel">点击此处取消选择</a>
@@ -19,14 +19,14 @@ function showSelectTip(): void {
 function toast(info: string, type: 'danger' | 'warning'): void {
   const template = $(`
   <div class="cds-element" data-from="cds">
-    <div class="cds-toast cds-toast-${type}">
+    <div class="cds-toast cds-in-left cds-toast-${type}">
       ${info}
     </div>
   </div>
   `);
   $('body').append(template);
   setTimeout(() => {
-    template.find('.cds-toast').addClass('cds-toast-leave');
+    template.find('.cds-toast').addClass('cds-out-left');
     setTimeout(() => {
       template.remove();
     }, 400);
