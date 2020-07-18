@@ -4,7 +4,7 @@
 function showSelectTip(): void {
   const template = $(`
     <div class="cds-element" data-from="cds">
-      <div id="cds-dom-setting-panel" data-from="cds">
+      <div id="select-tip-panel" data-from="cds">
         <div class="content-text" data-from="cds">
           点击左键可以选中需要自定义的内容<br/>
           <a href="javascript:showInfo()" data-from="cds-cancel">点击此处取消选择</a>
@@ -39,6 +39,23 @@ function toastImage(): void {
   `);
   fadeIn(template, 'left');
   setTimeout(() => fadeOut(template.find('.cds-toast'), 'left'), 2500);
+}
+
+function showDomSettingPanel(): void {
+  const template = $(`
+    <div class="cds-element" data-from="cds">
+      <div id="dom-setting-panel" data-from="cds">
+        <div class="dom-setting-panel-conent">
+          <textarea id="css" cols="30" rows="10"></textarea>
+          <div class="btns">
+            <button onclick="setDomStyle()" type="button" class="btn btn-primary">预览</button>
+            <button type="button" class="btn btn-success">应用</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `);
+  fadeIn(template, 'right');
 }
 
 /**

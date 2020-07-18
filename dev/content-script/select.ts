@@ -28,16 +28,40 @@ function clickDom(dom: JQuery<Document>): void {
       toastImage();
       break;
     default:
-      settingDomStyle(dom);
+      const path = getPath(dom);
+      sendCDSMessage('setDomStyle', path);
       break;
   }
 }
 
-function settingDomStyle(dom: JQuery<Document>): void {
+function getPath(
+  dom: JQuery<Document>
+): {
+  id: string;
+  cls: string;
+  index: number;
+}[] {
   closeSelectMode();
   hideSelectTip();
-  const id = dom.attr('id');
-  const cls = dom.attr('class');
+  showDomSettingPanel();
+  const nodes = dom.toArray().concat(dom.parents().toArray());
+  const path: {
+    id: string;
+    cls: string;
+    index: number;
+  }[] = [];
+  nodes.forEach(v => {
+    const elem = $(v);
+    if (['BODY', 'HTML'].includes(elem.prop('tagName'))) {
+      return;
+    }
+    const id = elem.attr('id') || '';
+    const cls = elem.attr('class') || '';
+    const index = elem.index() + 1;
+    path.push({ id, cls, index });
+  });
+  path.reverse();
+  return path;
 }
 
 function closeSelectMode(): void {
@@ -48,7 +72,7 @@ function closeSelectMode(): void {
 }
 
 function hideSelectTip(): void {
-  fadeOut($('.cds-element #cds-dom-setting-panel'), 'right');
+  fadeOut($('.cds-element #select-tip-panel'), 'right');
 }
 
 // Send DOM info to background after user select DOM

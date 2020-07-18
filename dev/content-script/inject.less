@@ -5,7 +5,7 @@
 
 .cds-element {
   box-sizing: content-box;
-  #cds-dom-setting-panel {
+  #select-tip-panel {
     position: fixed;
     right: 20px;
     top: 20px;
@@ -21,6 +21,26 @@
       color: #fff;
       font-size: 25px;
       text-align: left;
+    }
+  }
+
+  #dom-setting-panel {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background: #ffa80d;
+    padding: 10px;
+    box-shadow: 0px 0px 10px #f5bc21;
+    border-radius: 5px;
+    animation-duration: 0.5s;
+    z-index: 999;
+    .dom-setting-panel-conent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .btns {
+        margin-top: 20px;
+      }
     }
   }
 
