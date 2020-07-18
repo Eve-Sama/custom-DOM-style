@@ -24,7 +24,8 @@ function clickDom(dom: JQuery<Document>): void {
       hideSelectTip();
       break;
     case 'cds':
-      toast('想造反啊?!!!', 'warning');
+      // toast('想造反啊?!!!', 'warning');
+      toastImage();
       break;
     default:
       settingDomStyle(dom);
@@ -70,9 +71,11 @@ function hightLightArea(dom: JQuery<HTMLElement>) {
   if (exist) {
     selectedElem = $('#cds-select-elem');
   } else {
-    selectedElem = $(
-      '<div id="cds-select-elem" style="position: absolute; background: #a0c5e8; opacity: 0.5; z-index: 999; pointer-events: none;"></div>'
-    );
+    selectedElem = $(`
+      <div
+        id="cds-select-elem"
+        style="position: absolute; background: #a0c5e8; opacity: 0.5; z-index: 999; pointer-events: none;"></div>
+    `);
   }
   selectedElem.css({
     width: `${width}px`,

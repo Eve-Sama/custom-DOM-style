@@ -3,14 +3,14 @@
 /** Show some tips when user is selecting DOM */
 function showSelectTip(): void {
   const template = $(`
-  <div class="cds-element" data-from="cds">
-    <div id="cds-dom-setting-panel" data-from="cds">
-      <div class="content-text" data-from="cds">
-        点击左键可以选中需要自定义的内容<br/>
-        <a href="javascript:showInfo()" data-from="cds-cancel">点击此处取消选择</a>
+    <div class="cds-element" data-from="cds">
+      <div id="cds-dom-setting-panel" data-from="cds">
+        <div class="content-text" data-from="cds">
+          点击左键可以选中需要自定义的内容<br/>
+          <a href="javascript:showInfo()" data-from="cds-cancel">点击此处取消选择</a>
+        </div>
       </div>
     </div>
-  </div>
   `);
   fadeIn(template, 'right');
 }
@@ -18,11 +18,24 @@ function showSelectTip(): void {
 // Show toast message on web page
 function toast(info: string, type: 'danger' | 'warning'): void {
   const template = $(`
-  <div class="cds-element" data-from="cds">
-    <div class="cds-toast cds-toast-${type}">
-      ${info}
+    <div class="cds-element" data-from="cds">
+      <div class="cds-toast cds-toast-${type}">
+        ${info}
+      </div>
     </div>
-  </div>
+  `);
+  fadeIn(template, 'left');
+  setTimeout(() => fadeOut(template.find('.cds-toast'), 'left'), 2500);
+}
+
+function toastImage(): void {
+  const image = chrome.extension.getURL('dist/images/1.png');
+  const template = $(`
+    <div class="cds-element" data-from="cds">
+      <div class="cds-toast">
+        <img src="${image}">
+      </div>
+    </div>
   `);
   fadeIn(template, 'left');
   setTimeout(() => fadeOut(template.find('.cds-toast'), 'left'), 2500);
@@ -47,5 +60,3 @@ function fadeOut(dom: JQuery<HTMLElement>, direction: 'left' | 'right'): void {
   dom.addClass(`cds-out-${direction}`);
   setTimeout(() => dom.remove(), 400);
 }
-
-function toastImage(): void {}

@@ -14,7 +14,10 @@
     "128": "dist/images/128x128.png"
   },
   "permissions": ["storage"],
-  "web_accessible_resources": ["dist/content-script/inject.js"],
+  "web_accessible_resources": [
+    "dist/content-script/inject.js",
+    "dist/images/1.png"
+  ],
   "background": {
     "page": "dist/pages/background/background.html"
   },
