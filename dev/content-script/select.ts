@@ -47,12 +47,7 @@ function closeSelectMode(): void {
 }
 
 function hideSelectTip(): void {
-  const template = $('.cds-element #cds-dom-setting-panel');
-  // settingPanel.remove();
-  template.addClass('cds-out-right');
-  setTimeout(() => {
-    template.remove();
-  }, 400);
+  fadeOut($('.cds-element #cds-dom-setting-panel'), 'right');
 }
 
 // Send DOM info to background after user select DOM
