@@ -26,7 +26,7 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-        "dist/lib/jquery/jquery.min.js",
+        "node_modules/jquery/dist/jquery.min.js",
         "dist/content-script/init.js",
         "dist/content-script/message.js",
         "dist/content-script/template.js",
