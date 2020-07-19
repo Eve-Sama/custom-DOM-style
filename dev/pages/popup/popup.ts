@@ -17,16 +17,14 @@ $('#select-dom-open').click(() => {
   window.close();
 });
 
+// Will delete
 $('#select-dom-close').click(() => {
   sendMessage({ messageType: 'select-mode', data: { action: 'close' } });
 });
 
 $('#send-message-to-background').click(() => {
   console.log('mes');
-  chrome.runtime.sendMessage(
-    { messageType: 'add-elem', data: { url: 'baidu.com', selector: '#title' } },
-    null
-  );
+  chrome.runtime.sendMessage({ messageType: 'add-elem', data: { url: 'baidu.com', selector: '#title' } }, null);
   /**
    * 向 background 发送消息有两种方式, 一种是通过 chrome.runtime.sendMessage
    * 这种方式会向所有的 content-scripts 以及 background 发送消息
