@@ -8,7 +8,6 @@ interface StyleStore {
 
 // #region Global variable
 let dom: JQuery<HTMLElement>;
-let path: Path[];
 const host = window.location.host;
 // #endregion
 
@@ -29,9 +28,11 @@ chrome.storage.sync.get('cdsStyleStore', e => {
     const styleStore = e.cdsStyleStore as StyleStore[];
     if (styleStore) {
       const domainSetting = styleStore.find(v => v.host === host);
-      const { path, css } = domainSetting;
-      const dom = getDom(path);
-      applyDomSyle(dom, css);
+      if (domainSetting) {
+        const { path, css } = domainSetting;
+        const dom = getDom(path);
+        applyDomSyle(dom, css);
+      }
     }
   }, 1000);
 });

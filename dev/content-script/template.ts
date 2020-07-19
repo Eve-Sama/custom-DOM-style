@@ -7,7 +7,7 @@ function showSelectTip(): void {
       <div id="select-tip-panel" data-from="cds">
         <div class="content-text" data-from="cds">
           点击左键可以选中需要自定义的内容<br/>
-          <a href="javascript:showInfo()" data-from="cds-cancel">点击此处取消选择</a>
+          <a href="javascript:cancelSelect()" data-from="cds-cancel">点击此处取消选择</a>
         </div>
       </div>
     </div>
@@ -48,8 +48,9 @@ function showDomSettingPanel(): void {
         <div class="dom-setting-panel-conent">
           <textarea id="css-code" cols="30" rows="10"></textarea>
           <div class="btns">
-            <button onclick="preview()" type="button" class="btn btn-primary">预览</button>
-            <button onclick="save()" type="button" class="btn btn-success">保存</button>
+            <button onclick="preview()" type="button">预览</button>
+            <button onclick="save()" type="button">保存</button>
+            <button onclick="cancelSetting()" type="button">取消</button>
           </div>
         </div>
       </div>

@@ -48,7 +48,6 @@ function clickDom(dom: JQuery<Document>): void {
       hideSelectTip();
       showDomSettingPanel();
       this.dom = dom;
-      this.path = getPath(dom);
       break;
   }
 }
@@ -144,7 +143,7 @@ function getDom(path: Path[]): JQuery<HTMLElement> {
   return dom;
 }
 
-function getPath(dom: JQuery<Document>): Path[] {
+function getPath(dom: JQuery<HTMLElement>): Path[] {
   const nodes = dom.toArray().concat(dom.parents().toArray());
   const path: {
     id: string;
