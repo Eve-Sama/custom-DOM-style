@@ -6,15 +6,21 @@ function sendCDSMessage(action: string, data: any): void {
 }
 
 // Listen H5 message
-// window.addEventListener(
-//   'message',
-//   function (e) {
-//     const { data } = e;
-//     console.log(data, `data`);
-//     // toast(data);
-//   },
-//   false
-// );
+window.addEventListener(
+  'message',
+  e => {
+    const { type, data } = e.data;
+    if (type !== 'cds') {
+      return;
+    }
+    switch (data.action) {
+      case 'hideDomSettingPanel':
+        hideDomSettingPanel();
+        break;
+    }
+  },
+  false
+);
 
 // Listen message from popup or background;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {

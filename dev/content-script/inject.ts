@@ -6,12 +6,46 @@
 let dom: JQuery<HTMLElement>;
 
 function setDomStyle(): void {
-  console.log('showInfo');
+  const cssCode = ($('.cds-element #css-code').val() as String)
+    .replace(/\ +/g, '')
+    .replace(/[\r\n]/g, '');
+  const cssArr = cssCode.split(';');
+  applyDomSyle(cssArr);
+}
+
+function saveDomStyle(
+  cssArr: string[],
+  path: {
+    id: string;
+    cls: string;
+    index: number;
+  }
+): void {
+  // chrome.storage.sync.set({ cssArr, path });
+  window.postMessage(
+    { type: 'cds', data: { action: 'hideDomSettingPanel' } },
+    '*'
+  );
+}
+
+function applyDomSyle(cssArr: string[]): void {
+  cssArr
+    .filter(v => v)
+    .forEach(v => {
+      const css = v.split(':');
+      const cssKey = css[0];
+      const cssValue = css[1];
+      const style = dom.attr('style') || '';
+      dom.attr(
+        'style',
+        `${style}; \r\n ${cssKey}: ${cssValue} !important \r\n`
+      );
+    });
 }
 
 window.addEventListener(
   'message',
-  function (e) {
+  e => {
     const { type, data } = e.data;
     if (type !== 'cds') {
       return;
@@ -24,7 +58,7 @@ window.addEventListener(
           cls: string;
           index: number;
         }[];
-        const dom = getDom(path);
+        dom = getDom(path);
         console.log(dom, `dom`);
         break;
     }

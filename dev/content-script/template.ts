@@ -29,7 +29,7 @@ function toast(info: string, type: 'danger' | 'warning'): void {
 }
 
 function toastImage(): void {
-  const image = chrome.extension.getURL('dist/images/1.png');
+  const image = chrome.extension.getURL('dist/images/2.png');
   const template = $(`
     <div class="cds-element" data-from="cds">
       <div class="cds-toast">
@@ -46,16 +46,20 @@ function showDomSettingPanel(): void {
     <div class="cds-element" data-from="cds">
       <div id="dom-setting-panel" data-from="cds">
         <div class="dom-setting-panel-conent">
-          <textarea id="css" cols="30" rows="10"></textarea>
+          <textarea id="css-code" cols="30" rows="10"></textarea>
           <div class="btns">
             <button onclick="setDomStyle()" type="button" class="btn btn-primary">预览</button>
-            <button type="button" class="btn btn-success">应用</button>
+            <button onclick="saveDomStyle()" type="button" class="btn btn-success">应用</button>
           </div>
         </div>
       </div>
     </div>
   `);
   fadeIn(template, 'right');
+}
+
+function hideDomSettingPanel(): void {
+  fadeOut($('.cds-element #dom-setting-panel'), 'right');
 }
 
 /**

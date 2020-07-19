@@ -16,7 +16,7 @@
   "permissions": ["storage"],
   "web_accessible_resources": [
     "dist/content-script/inject.js",
-    "dist/images/1.png"
+    "dist/images/2.png"
   ],
   "background": {
     "page": "dist/pages/background/background.html"
