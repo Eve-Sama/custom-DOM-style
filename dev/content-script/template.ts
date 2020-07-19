@@ -48,8 +48,8 @@ function showDomSettingPanel(): void {
         <div class="dom-setting-panel-conent">
           <textarea id="css-code" cols="30" rows="10"></textarea>
           <div class="btns">
-            <button onclick="setDomStyle()" type="button" class="btn btn-primary">预览</button>
-            <button onclick="saveDomStyle()" type="button" class="btn btn-success">应用</button>
+            <button onclick="preview()" type="button" class="btn btn-primary">预览</button>
+            <button onclick="save()" type="button" class="btn btn-success">保存</button>
           </div>
         </div>
       </div>

@@ -1,8 +1,25 @@
 /** Messages between all pages */
 
+interface Path {
+  id: string;
+  cls: string;
+  index: number;
+}
+
+interface CssSetting {
+  key: string;
+  value: string;
+}
+
+interface StyleStore {
+  host: string;
+  path: Path[];
+  css: CssSetting[];
+}
+
 // Use H5 send message
-function sendCDSMessage(action: string, data: any): void {
-  window.postMessage({ type: 'cds', data: { action, data } }, '*');
+function sendCDSMessage(action: string, info: any): void {
+  window.postMessage({ type: 'cds', data: { action, info } }, '*');
 }
 
 // Listen H5 message
@@ -13,10 +30,16 @@ window.addEventListener(
     if (type !== 'cds') {
       return;
     }
-    switch (data.action) {
-      case 'hideDomSettingPanel':
-        hideDomSettingPanel();
-        break;
+    const { action } = data;
+    if (action === 'preview-dom-style') {
+      const css = getCssSetting();
+      applyDomSyle(dom, css);
+    } else if (action === 'save-dom-style') {
+      const css = getCssSetting();
+      const styleStore: StyleStore = { host, path, css };
+      applyDomSyle(dom, css);
+      saveDomStyle(styleStore);
+      hideDomSettingPanel();
     }
   },
   false

@@ -1,5 +1,22 @@
 /** Select DOM logic */
 
+interface CssSetting {
+  key: string;
+  value: string;
+}
+
+interface Path {
+  id: string;
+  cls: string;
+  index: number;
+}
+
+interface StyleStore {
+  host: string;
+  path: Path[];
+  css: CssSetting[];
+}
+
 let onSelect = false;
 function openSelectMode(): void {
   if (onSelect) {
@@ -9,11 +26,11 @@ function openSelectMode(): void {
 
   $('body')
     .children()
-    .mousemove(event => hightLightArea($(event.target)));
+    .mousemove(e => hightLightArea($(e.target)));
 
   showSelectTip();
 
-  $(document).click(event => clickDom($(event.target)));
+  $(document).click(e => clickDom($(e.target)));
 }
 
 function clickDom(dom: JQuery<Document>): void {
@@ -24,44 +41,16 @@ function clickDom(dom: JQuery<Document>): void {
       hideSelectTip();
       break;
     case 'cds':
-      // toast('想造反啊?!!!', 'warning');
       toastImage();
       break;
     default:
-      const path = getPath(dom);
-      sendCDSMessage('setDomStyle', path);
+      closeSelectMode();
+      hideSelectTip();
+      showDomSettingPanel();
+      this.dom = dom;
+      this.path = getPath(dom);
       break;
   }
-}
-
-function getPath(
-  dom: JQuery<Document>
-): {
-  id: string;
-  cls: string;
-  index: number;
-}[] {
-  closeSelectMode();
-  hideSelectTip();
-  showDomSettingPanel();
-  const nodes = dom.toArray().concat(dom.parents().toArray());
-  const path: {
-    id: string;
-    cls: string;
-    index: number;
-  }[] = [];
-  nodes.forEach(v => {
-    const elem = $(v);
-    if (['BODY', 'HTML'].includes(elem.prop('tagName'))) {
-      return;
-    }
-    const id = elem.attr('id') || '';
-    const cls = elem.attr('class') || '';
-    const index = elem.index() + 1;
-    path.push({ id, cls, index });
-  });
-  path.reverse();
-  return path;
 }
 
 function closeSelectMode(): void {
@@ -74,9 +63,6 @@ function closeSelectMode(): void {
 function hideSelectTip(): void {
   fadeOut($('.cds-element #select-tip-panel'), 'right');
 }
-
-// Send DOM info to background after user select DOM
-// chrome.runtime.sendMessage({ data: targetElem.attr('id') }, null);
 
 /**
  * Highlight the area of the mouse's hover
@@ -111,4 +97,74 @@ function hightLightArea(dom: JQuery<HTMLElement>) {
     $('body').append(selectedElem);
   }
   // #endregion
+}
+
+function getCssSetting(): CssSetting[] {
+  const cssCode = ($('.cds-element #css-code').val() as String).replace(/\ +/g, '').replace(/[\r\n]/g, '');
+  const cssArr = cssCode.split(';');
+  const result: CssSetting[] = [];
+  cssArr
+    .filter(v => v)
+    .forEach(v => {
+      const css = v.split(':');
+      const key = css[0];
+      const value = css[1];
+      result.push({ key, value });
+    });
+
+  return result;
+}
+
+function applyDomSyle(dom: JQuery<HTMLElement>, css: CssSetting[]): void {
+  css.forEach(v => {
+    {
+      const { key, value } = v;
+      const style = dom.attr('style') || '';
+      dom.attr('style', `${style}; \r\n ${key}: ${value} !important \r\n`);
+    }
+  });
+}
+
+function getDom(path: Path[]): JQuery<HTMLElement> {
+  let dom = $('body');
+  path.forEach(v => {
+    let query = '';
+    if (v.id) {
+      query = `#${v.id}`;
+    }
+    if (v.cls) {
+      const classes = v.cls.split(' ');
+      let clsSelector = '';
+      classes.forEach(_cls => (clsSelector += `.${_cls}`));
+      query += clsSelector;
+    }
+    query = `${query}:nth-child(${v.index})`;
+    dom = dom.find(`${query}`);
+  });
+  return dom;
+}
+
+function getPath(dom: JQuery<Document>): Path[] {
+  const nodes = dom.toArray().concat(dom.parents().toArray());
+  const path: {
+    id: string;
+    cls: string;
+    index: number;
+  }[] = [];
+  nodes.forEach(v => {
+    const elem = $(v);
+    if (['BODY', 'HTML'].includes(elem.prop('tagName'))) {
+      return;
+    }
+    const id = elem.attr('id') || '';
+    const cls = elem.attr('class') || '';
+    const index = elem.index() + 1;
+    path.push({ id, cls, index });
+  });
+  path.reverse();
+  return path;
+}
+
+function saveDomStyle(styleStore: StyleStore): void {
+  chrome.storage.sync.set({ cdsStyleStore: [styleStore] });
 }
