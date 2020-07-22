@@ -140,6 +140,7 @@ function getDom(path: Path[]): JQuery<HTMLElement> {
     query = `${query}:nth-child(${v.index})`;
     dom = dom.find(`${query}`);
   });
+  console.log(dom, `target`);
   return dom;
 }
 
@@ -155,8 +156,8 @@ function getPath(dom: JQuery<HTMLElement>): Path[] {
     if (['BODY', 'HTML'].includes(elem.prop('tagName'))) {
       return;
     }
-    const id = elem.attr('id') || '';
-    const cls = elem.attr('class') || '';
+    const id = (elem.attr('id') || '').trim();
+    const cls = (elem.attr('class') || '').trim();
     const index = elem.index() + 1;
     path.push({ id, cls, index });
   });

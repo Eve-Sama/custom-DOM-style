@@ -5,3 +5,4 @@
  - delete duplicate style of css
  - read setted css when select same element
  - do not set dom's css, should override style
+ - reorgnize files strctrue so that telling content and injection
