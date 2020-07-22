@@ -165,6 +165,11 @@ function getPath(dom: JQuery<HTMLElement>): Path[] {
   return path;
 }
 
-function saveDomStyle(styleStore: StyleStore): void {
-  chrome.storage.sync.set({ cdsStyleStore: [styleStore] });
+function saveDomStyle(value: StyleStore): void {
+  if (styleStore) {
+    styleStore.push(value);
+  } else {
+    styleStore = [value];
+  }
+  chrome.storage.sync.set({ cdsStyleStore: styleStore });
 }

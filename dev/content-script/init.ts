@@ -11,8 +11,6 @@ let dom: JQuery<HTMLElement>;
 const host = window.location.host;
 // #endregion
 
-let styleStore: StyleStore[];
-
 // Inject script to page
 window.onload = function () {
   const script = document.createElement('script');
@@ -22,17 +20,18 @@ window.onload = function () {
   document.body.appendChild(script);
 };
 
+let styleStore: StyleStore[];
 chrome.storage.sync.get('cdsStyleStore', e => {
   // console.log(e, `e`);
-  const styleStore = e.cdsStyleStore as StyleStore[];
+  styleStore = e.cdsStyleStore as StyleStore[];
+  console.log(styleStore, `styleStore`);
   if (styleStore) {
-    const domainSetting = styleStore.find(v => v.host === host);
-    if (domainSetting) {
-      const { path, css } = domainSetting;
+    const domainSetting = styleStore.filter(v => v.host === host) || [];
+    let html = '';
+    domainSetting.forEach(v => {
+      const { path, css } = v;
       console.log(path, `path`);
       console.log(css, `css`);
-      // const dom = getDom(path);
-      // applyDomSyle(dom, css);
       let query = '';
       path.forEach(v => {
         if (v.id) {
@@ -49,9 +48,10 @@ chrome.storage.sync.get('cdsStyleStore', e => {
       let cssText = '';
       css.forEach(v => (cssText += `${v.key}:${v.value} !important;`));
       console.log(query, `query`);
-      const el = document.createElement('style');
-      el.textContent = `${query}{ ${cssText} }`;
-      document.documentElement.appendChild(el);
-    }
+      html += `${query}{ ${cssText} }`;
+    });
+    const el = document.createElement('style');
+    el.textContent = html;
+    document.documentElement.appendChild(el);
   }
 });
