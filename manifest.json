@@ -14,26 +14,25 @@
     "128": "dist/images/128x128.png"
   },
   "permissions": ["storage"],
-  "web_accessible_resources": [
-    "dist/content-script/inject.js",
-    "dist/images/2.png",
-    "dist/images/3.png"
-  ],
+  "web_accessible_resources": ["dist/content-script/inject.js", "dist/images/2.png", "dist/images/3.png"],
   "background": {
     "page": "dist/pages/background/background.html"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "js": ["dist/content-script/init.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
       "js": [
         "node_modules/jquery/dist/jquery.min.js",
-        "dist/content-script/init.js",
         "dist/content-script/message.js",
         "dist/content-script/template.js",
         "dist/content-script/select.js"
       ],
-      "css": ["dist/content-script/inject.css"],
-      "run_at": "document_start"
+      "css": ["dist/content-script/inject.css"]
     }
   ]
 }
