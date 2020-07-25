@@ -1,11 +1,5 @@
 /** Actions that should be done in the first of all */
 
-interface StyleStore {
-  host: string;
-  path: Path[];
-  css: CssSetting[];
-}
-
 // #region Global variable
 let dom: JQuery<HTMLElement>;
 const host = window.location.host;

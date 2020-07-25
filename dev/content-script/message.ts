@@ -1,22 +1,5 @@
 /** Messages between all pages */
 
-interface Path {
-  id: string;
-  cls: string;
-  index: number;
-}
-
-interface CssSetting {
-  key: string;
-  value: string;
-}
-
-interface StyleStore {
-  host: string;
-  path: Path[];
-  css: CssSetting[];
-}
-
 // Use H5 send message
 function sendCDSMessage(action: string, info: any): void {
   window.postMessage({ type: 'cds', data: { action, info } }, '*');
