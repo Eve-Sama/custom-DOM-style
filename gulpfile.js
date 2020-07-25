@@ -4,22 +4,13 @@ const plugins = require('gulp-load-plugins')();
 const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json');
 
-function copyAllFiles(cb) {
-  src(['dev/**/*', '!dev/**/*.ts', '!dev/**/*.less'])
-    .pipe(plugins.newer('dist'))
-    .pipe(dest('dist'));
+// copy all useful files
+function copy(cb) {
+  src(['dev/**/*', '!dev/**/*.ts', '!dev/**/*.less']).pipe(plugins.newer('dist')).pipe(dest('dist'));
   cb();
 }
 
-function js(cb) {
-  src('dev/**/*.ts')
-    .pipe(plugins.newer('dist'))
-    .pipe(tsProject())
-    .pipe(dest('dist'));
-  cb();
-}
-
-// 对scss/less编译压缩，输出css文件
+// compile .less
 function css(cb) {
   src('dev/**/*.less')
     .pipe(plugins.newer('dist'))
@@ -34,22 +25,21 @@ function css(cb) {
   cb();
 }
 
-// copy html files to dist
-function html(cb) {
-  src('dev/**/*.html')
-    .pipe(plugins.newer('dist'))
-    .pipe(dest('dist'));
+// compile .ts
+function js(cb) {
+  src('dev/**/*.ts').pipe(plugins.newer('dist')).pipe(tsProject()).pipe(dest('dist'));
+  // .pipe(plugins.concat('content-script.ts'))
+  cb();
+  console.log('\033[42;30m DONE \033[40;32m Compiled successfully, enjoy coding~\033[0m');
+}
+
+function watcher(cb) {
+  watch('dev/', parallel([css, js]));
   cb();
 }
 
-function watcher() {
-  // It will watse resouce if execute copyAllFiles whenever .ts file change
-  // watch('dev/', series([copyAllFiles, js]));
-  watch('dev/', parallel([html, css, js]));
-}
-
-task('start', series([copyAllFiles, js, css, watcher]));
-task('copy', parallel([copyAllFiles]));
+task('start', series([copy, css, js, watcher]));
+task('copy', parallel([copy]));
 
 // It's unnesscery for me now, I'll use is when the project become very big
 // require('./scripts/start');
