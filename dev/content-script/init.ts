@@ -37,8 +37,9 @@ chrome.storage.sync.get('cdsStyleStore', e => {
           classes.forEach(_cls => (clsSelector += `.${_cls}`));
           query += clsSelector;
         }
-        query += `:nth-child(${v.index}) `;
+        query += `:nth-child(${v.index}) > `;
       });
+      query = query.substring(0,query.length - 3);
       let cssText = '';
       css.forEach(v => (cssText += `${v.key}:${v.value} !important;`));
       console.log(query, `query`);
