@@ -30,6 +30,7 @@
         "node_modules/jquery/dist/jquery.min.js",
         "dist/content-script/message.js",
         "dist/content-script/template.js",
+        "dist/content-script/style-setting.js",
         "dist/content-script/select.js"
       ],
       "css": ["dist/content-script/inject.css"]
