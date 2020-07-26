@@ -33,13 +33,18 @@ window.addEventListener('message', function (e) {
 
 // Listen message from popup or background;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  const { messageType, data } = request;
-  switch (messageType) {
+  const { type, data } = request;
+  // really need to tell?
+  if (type !== 'cds') {
+    return;
+  }
+  const { action } = data;
+  switch (action) {
     case 'select-mode':
-      const { action } = data;
-      if (action === 'open') {
-        openSelectMode();
-      }
+      openSelectMode();
+      break;
+    case 'remove-cds-style':
+      removeStyle();
       break;
   }
 });

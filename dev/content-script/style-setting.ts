@@ -14,6 +14,10 @@ function getCssSetting(): CssSetting[] {
   return result;
 }
 
+function removeStyle(): void {
+  $('html > style[data-from="cds-style"]').remove();
+}
+
 function applyDomSyle(dom: JQuery<HTMLElement>, css: CssSetting[]): void {
   css.forEach(v => {
     {

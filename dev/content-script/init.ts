@@ -45,6 +45,7 @@ chrome.storage.sync.get('cdsStyleStore', e => {
       html += `${query}{ ${cssText} }`;
     });
     const el = document.createElement('style');
+    el.setAttribute('data-from', 'cds-style');
     el.textContent = html;
     document.documentElement.appendChild(el);
   }

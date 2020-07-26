@@ -13,19 +13,20 @@ function sendMessage(message: any): void {
 }
 
 $('#select-dom-open').click(() => {
-  sendMessage({ messageType: 'select-mode', data: { action: 'open' } });
+  sendMessage({ type: 'cds', data: { action: 'select-mode' } });
   window.close();
 });
 
 $('#clear-dom-style').click(() => {
   chrome.storage.sync.set({ cdsStyleStore: null });
+  sendMessage({ type: 'cds', data: { action: 'remove-cds-style' } });
   window.close();
 });
 
 
 $('#send-message-to-background').click(() => {
   console.log('mes');
-  chrome.runtime.sendMessage({ messageType: 'add-elem', data: { url: 'baidu.com', selector: '#title' } }, null);
+  // chrome.runtime.sendMessage({ type: 'add-elem', data: { url: 'baidu.com', selector: '#title' } }, null);
   /**
    * 向 background 发送消息有两种方式, 一种是通过 chrome.runtime.sendMessage
    * 这种方式会向所有的 content-scripts 以及 background 发送消息
