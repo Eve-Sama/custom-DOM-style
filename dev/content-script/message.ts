@@ -39,8 +39,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       const { action } = data;
       if (action === 'open') {
         openSelectMode();
-      } else if (action === 'close') {
-        closeSelectMode();
       }
       break;
   }

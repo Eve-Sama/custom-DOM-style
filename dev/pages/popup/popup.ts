@@ -17,10 +17,11 @@ $('#select-dom-open').click(() => {
   window.close();
 });
 
-// Will delete
-$('#select-dom-close').click(() => {
-  sendMessage({ messageType: 'select-mode', data: { action: 'close' } });
+$('#clear-dom-style').click(() => {
+  chrome.storage.sync.set({ cdsStyleStore: null });
+  window.close();
 });
+
 
 $('#send-message-to-background').click(() => {
   console.log('mes');

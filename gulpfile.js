@@ -34,7 +34,7 @@ function js(cb) {
 }
 
 function watcher(cb) {
-  watch('dev/', parallel([css, js]));
+  watch('dev/', parallel([copy, css, js]));
   cb();
 }
 
