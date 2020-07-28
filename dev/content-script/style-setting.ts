@@ -1,3 +1,5 @@
+/** set DOM style logic */
+
 function getCssSetting(): CssSetting[] {
   const cssCode = ($('.cds-element #css-code').val() as String).replace(/\ +/g, '').replace(/[\r\n]/g, '');
   const cssArr = cssCode.split(';');

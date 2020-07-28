@@ -1,4 +1,4 @@
-/** Set DOM style logic */
+/** select DOM logic */
 
 let onSelect = false;
 function openSelectMode(): void {
