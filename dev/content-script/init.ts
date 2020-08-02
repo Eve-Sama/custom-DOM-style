@@ -16,6 +16,9 @@ window.onload = function () {
 
 let styleStore: StyleStore[];
 chrome.storage.sync.get('cdsStyleStore', e => {
+  if (!e) {
+    return;
+  }
   // console.log(e, `e`);
   styleStore = e.cdsStyleStore as StyleStore[];
   console.log(styleStore, `styleStore`);
@@ -39,7 +42,7 @@ chrome.storage.sync.get('cdsStyleStore', e => {
         }
         query += `:nth-child(${v.index}) > `;
       });
-      query = query.substring(0,query.length - 3);
+      query = query.substring(0, query.length - 3);
       let cssText = '';
       css.forEach(v => (cssText += `${v.key}:${v.value} !important;`));
       console.log(query, `query`);
