@@ -71,11 +71,16 @@ function getPath(dom: JQuery<HTMLElement>): Path[] {
   return path;
 }
 
-function saveDomStyle(value: StyleStore): void {
-  if (styleStore) {
-    styleStore.push(value);
+/** host参数不确定要不要, 先+上 */
+function saveDomStyle(settings: SingleDOMSetting, host = window.location.host): void {
+  const item = styleStore.find(v => v.host === host);
+  if (item) {
+    item.settings.push(settings);
   } else {
-    styleStore = [value];
+    styleStore.push({
+      host,
+      settings: [settings]
+    });
   }
   chrome.storage.sync.set({ cdsStyleStore: styleStore });
 }

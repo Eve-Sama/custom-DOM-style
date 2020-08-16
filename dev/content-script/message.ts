@@ -19,9 +19,8 @@ window.addEventListener('message', function (e) {
   } else if (action === 'save-dom-style') {
     const css = getCssSetting();
     const path = getPath(dom);
-    const styleStore: StyleStore = { host, path, css };
     applyDomSyle(dom, css);
-    saveDomStyle(styleStore);
+    saveDomStyle({ path, css });
     hideDomSettingPanel();
   } else if (action === 'cancelSelect') {
     closeSelectMode();

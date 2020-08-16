@@ -16,19 +16,19 @@ window.onload = function () {
 
 let styleStore: StyleStore[];
 chrome.storage.sync.get('cdsStyleStore', e => {
-  if (!e) {
+  if (!e.cdsStyleStore) {
     return;
   }
-  // console.log(e, `e`);
-  styleStore = e.cdsStyleStore as StyleStore[];
+  console.log(e, `e`);
+  styleStore = e.cdsStyleStore || [];
   console.log(styleStore, `styleStore`);
   if (styleStore) {
-    const domainSetting = styleStore.filter(v => v.host === host) || [];
+    const currentHost = styleStore.find(v => v.host === host);
     let html = '';
-    domainSetting.forEach(v => {
+    currentHost.settings.forEach(v => {
       const { path, css } = v;
-      console.log(path, `path`);
-      console.log(css, `css`);
+      // console.log(path, `path`);
+      // console.log(css, `css`);
       let query = '';
       path.forEach(v => {
         if (v.id) {
